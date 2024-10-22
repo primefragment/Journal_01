@@ -20,7 +20,7 @@ fig2=px.line(df, x='Date', y=['Hours Planned','Hours Worked'], title='Hours Plan
 fig2.update_layout(legend_title='', xaxis = dict(tickformat='%d-%b\n%a'))
 
 fig3=px.bar(df, x='Date', y=['GameDev','Growth','Trading','Venture'], title='Hours Breakdown', width=300)
-fig3.update_layout(legend_title='', bargap=0.5, xaxis= dict(type='category', categoryorder='category ascending', tickformat='%d-%b\n%a'))
+fig3.update_layout(legend_title='', bargap=0.5, xaxis= dict(tickformat='%d-%b\n%a'))
 
 
 # App and Layout
