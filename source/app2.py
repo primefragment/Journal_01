@@ -9,13 +9,14 @@ from pathlib import Path
 current_dir = Path(__file__).parent
 root_dir = current_dir.parent
 df = pd.read_csv(root_dir / 'data' / 'daily_journal_01.csv')
+df['Total Work'] = df['GameDev'] + df['Growth'] + df['Finance'] + df['Venture']
 
 
 # Figures
 fig1=px.line(df, x='Date', y='Wakeup Time', title='Wakeup Time', line_shape='spline', range_y=[4,9], width=300)
 fig1.update_layout(xaxis = dict(tickformat='%d-%b\n%a', title_text = ''), yaxis = dict(title_text = '', tickmode='linear'))
 
-fig2=px.line(df, x='Date', y=['Hours Planned','Hours Worked'], title='Hours Planned/Worked', range_y=[0,9], line_shape='spline', width=300)
+fig2=px.line(df, x='Date', y=['Hours Planned','Total Work'], title='Hours Planned/Worked', range_y=[0,9], line_shape='spline', width=300)
 fig2.update_layout(legend_title='', xaxis = dict(tickformat='%d-%b\n%a', title_text = ''), yaxis = dict(tickmode='linear',title_text = ''))
 
 fig3=px.bar(df, x='Date', y=['GameDev','Growth','Finance','Venture'], title='Work Breakdown', width=300)
