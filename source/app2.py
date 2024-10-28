@@ -8,12 +8,12 @@ from pathlib import Path
 # Load your CSV file into a DataFrame
 current_dir = Path(__file__).parent
 root_dir = current_dir.parent
-df = pd.read_csv(root_dir / 'data' / 'daily_journal_01.csv')
+df = pd.read_csv(root_dir / 'data' / 'daily_journal_oct_2024.csv')
 df['Total Work'] = df['GameDev'] + df['Growth'] + df['Finance'] + df['Venture']
 
 
 # Figures
-fig1=px.line(df, x='Date', y='Wakeup Time', title='Wakeup Time', line_shape='spline', range_y=[4,9], width=300)
+fig1=px.line(df, x='Date', y='Wakeup Time', title='Wakeup Time', line_shape='spline', range_y=[4,10], width=300)
 fig1.update_layout(xaxis = dict(tickformat='%d-%b\n%a', title_text = ''), yaxis = dict(title_text = '', tickmode='linear'))
 
 fig2=px.line(df, x='Date', y=['Hours Planned','Total Work'], title='Hours Planned/Worked', range_y=[0,9], line_shape='spline', width=300)
@@ -37,6 +37,7 @@ app.layout = html.Div([
         id='graph2',
         figure=fig2
     ),
+    
     dcc.Graph(
         id='graph3',
         figure=fig3
