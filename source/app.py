@@ -1,25 +1,18 @@
-from dash import Dash, html, dcc, callback, Output, Input
-import plotly.express as px
+
+from pathlib import Path
+
+import streamlit as st
 import pandas as pd
+ 
+st.write("""
+# My first app
+Hello *world!*
+""")
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder_unfiltered.csv')
+# Load your CSV file into a DataFrame
+current_dir = Path(__file__).parent
+root_dir = current_dir.parent
+df = pd.read_csv(root_dir / 'data' / 'daily_journal_oct_2024.csv')
+df['Total Work'] = df['GameDev'] + df['Growth'] + df['Finance'] + df['Venture']
 
-app = Dash()
-
-app.layout = [
-    html.H1(children='Title of Dash App', style={'textAlign':'center'}),
-    dcc.Dropdown(df.country.unique(), 'Canada', id='dropdown-selection'),
-    dcc.Graph(id='graph-content')
-]
-
-@callback(
-    Output('graph-content', 'figure'),
-    Input('dropdown-selection', 'value')
-)
-def update_graph(value):
-    dff = df[df.country==value]
-    return px.line(dff, x='year', y='pop')
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
+st.line_chart(df['Wakeup Time'])
